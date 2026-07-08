@@ -2,6 +2,14 @@
 
 MEEP 是一个轻量的 Windows 桌面宠物应用。它使用 Python、Tkinter 和 Pillow 播放透明背景 GIF 动画，支持自动移动、鼠标移入/点击触发动作、左键拖拽和右键退出。
 
+## 下载和使用
+
+如果只想直接运行程序，请到项目的 [Releases](../../releases) 页面下载最新版本中的 `meep.exe`。
+
+下载后双击 `meep.exe` 即可启动。右键点击桌面宠物可以退出程序。
+
+如果 Windows 提示“无法确认发布者”或 SmartScreen 警告，这是因为当前可执行文件没有代码签名。确认文件来自本项目 Release 页面后，可以选择继续运行。
+
 ## 功能
 
 - 透明、置顶的桌面宠物窗口
@@ -25,7 +33,7 @@ MEEP 是一个轻量的 Windows 桌面宠物应用。它使用 Python、Tkinter 
 └── README.md
 ```
 
-## 本地运行
+## 从源码运行
 
 建议使用 Python 3.10 或更新版本。
 
@@ -44,6 +52,49 @@ pyinstaller .\meep.spec --noconfirm --clean
 ```
 
 打包完成后，可执行文件位于 `dist/meep.exe`。
+
+发布 Release 时，建议把这个 `dist/meep.exe` 作为附件上传，让普通用户不需要安装 Python。
+
+## 发布新版本
+
+维护者可以按下面的流程在 GitHub 上发布源码和可执行文件：
+
+1. 在 Windows 上确认程序能运行，并重新打包：
+
+```powershell
+pip install -r requirements-dev.txt
+pyinstaller .\meep.spec --noconfirm --clean
+```
+
+2. 确认生成的文件存在：
+
+```powershell
+dir .\dist\meep.exe
+```
+
+3. 提交代码变更并打标签，例如：
+
+```powershell
+git add .
+git commit -m "Prepare v1.0.0 release"
+git tag v1.0.0
+git push
+git push origin v1.0.0
+```
+
+4. 打开 GitHub 项目的 **Releases** 页面，点击 **Draft a new release**。
+
+5. 选择刚推送的标签，例如 `v1.0.0`。
+
+6. 上传 `dist/meep.exe` 作为 Release 附件。
+
+7. 发布 Release。GitHub 会自动提供源码压缩包 `Source code (zip)` 和 `Source code (tar.gz)`，不需要手动上传源码包。
+
+推荐每个 Release 至少包含这些附件或说明：
+
+- `meep.exe`：给普通 Windows 用户直接下载运行
+- `Source code (zip)`：GitHub 自动生成，给开发者查看源码
+- 更新说明：列出本版本新增内容、修复内容和已知问题
 
 ## 自定义动画
 
