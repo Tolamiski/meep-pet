@@ -1,16 +1,20 @@
 # MEEP
 
-MEEP 是一个轻量的 Windows 桌面宠物应用。它使用 Python、Tkinter 和 Pillow 播放透明背景 GIF 动画，支持自动移动、鼠标移入/点击触发动作、左键拖拽和右键退出。
+MEEP 是一个轻量的桌面宠物应用。它使用 GIF 动画显示透明、置顶的桌面宠物，支持自动移动、鼠标移入/点击触发动作、左键拖拽和右键退出。
 
-当前主版本优先支持 Windows。`macos-version` 分支包含一个实验性的 macOS 原生 AppKit 版本。
+当前项目包含 Windows/Tkinter 版本和 macOS/AppKit 版本。Windows 用户可以直接下载 `meep.exe`，macOS 用户可以下载 `MEEP.app` 的压缩包或 DMG。
 
 ## 下载和使用
 
-如果只想直接运行程序，请到项目的 [Releases](../../releases) 页面下载最新版本中的 `meep.exe`。
+如果只想直接运行程序，请到项目的 [Releases](../../releases) 页面下载最新版本。
 
-下载后双击 `meep.exe` 即可启动。右键点击桌面宠物可以退出程序。
+Windows 用户下载 `meep.exe`，双击即可启动。右键点击桌面宠物可以退出程序。
+
+macOS 用户下载 `MEEP-macOS.zip` 或 `MEEP-macOS.dmg`。如果下载的是 zip，解压后双击 `MEEP.app`；如果下载的是 dmg，打开后把 `MEEP.app` 拖到 Applications，再双击运行。
 
 如果 Windows 提示“无法确认发布者”或 SmartScreen 警告，这是因为当前可执行文件没有代码签名。确认文件来自本项目 Release 页面后，可以选择继续运行。
+
+如果 macOS 提示“无法验证开发者”，这是因为当前应用没有代码签名和公证。确认文件来自本项目 Release 页面后，可以右键点击 `MEEP.app`，选择“打开”，再确认运行。
 
 ## 功能
 
@@ -19,7 +23,7 @@ MEEP 是一个轻量的 Windows 桌面宠物应用。它使用 Python、Tkinter 
 - 自动水平移动，到达屏幕边缘后转向
 - 鼠标移入或左键点击触发动作动画
 - 左键拖拽移动位置，右键确认退出
-- 使用 PyInstaller 打包为 Windows GUI 程序
+- 使用 PyInstaller 打包为 Windows GUI 程序或 macOS App
 
 ## 项目结构
 
