@@ -72,8 +72,6 @@ pyinstaller .\meep.spec --noconfirm --clean
 
 打包完成后，可执行文件位于 `dist/meep.exe`。
 
-发布 Release 时，建议把这个 `dist/meep.exe` 作为附件上传，让普通用户不需要安装 Python。
-
 ## 打包 macOS 应用
 
 需要在 macOS 上打包：
