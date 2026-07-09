@@ -2,6 +2,8 @@
 
 MEEP 是一个轻量的 Windows 桌面宠物应用。它使用 Python、Tkinter 和 Pillow 播放透明背景 GIF 动画，支持自动移动、鼠标移入/点击触发动作、左键拖拽和右键退出。
 
+当前主版本优先支持 Windows。`macos-version` 分支包含一个实验性的 macOS 原生 AppKit 版本。
+
 ## 下载和使用
 
 如果只想直接运行程序，请到项目的 [Releases](../../releases) 页面下载最新版本中的 `meep.exe`。
@@ -25,10 +27,14 @@ MEEP 是一个轻量的 Windows 桌面宠物应用。它使用 Python、Tkinter 
 .
 ├── assets/                  # GIF 动画资源
 ├── src/
-│   └── meep.py              # 应用入口
-├── meep.spec                # PyInstaller 配置
+│   ├── meep.py              # Windows/Tkinter 应用入口
+│   └── meep_macos.py        # macOS/AppKit 应用入口
+├── meep.spec                # Windows PyInstaller 配置
+├── meep-macos.spec          # macOS PyInstaller 配置
 ├── requirements.txt         # 运行依赖
 ├── requirements-dev.txt     # 打包依赖
+├── requirements-macos.txt   # macOS 运行依赖
+├── requirements-macos-dev.txt
 ├── LICENSE
 └── README.md
 ```
@@ -44,6 +50,19 @@ pip install -r requirements.txt
 python .\src\meep.py
 ```
 
+## 在 macOS 上运行
+
+macOS 版本使用 PyObjC/AppKit 原生窗口，而不是 Tkinter 的透明窗口能力。
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements-macos.txt
+python src/meep_macos.py
+```
+
+macOS 版本会创建透明、无边框、置顶的桌面宠物窗口。左键点击或鼠标移入会触发动作，左键拖拽可以移动位置，右键可以退出。
+
 ## 打包 Windows 可执行文件
 
 ```powershell
@@ -54,6 +73,17 @@ pyinstaller .\meep.spec --noconfirm --clean
 打包完成后，可执行文件位于 `dist/meep.exe`。
 
 发布 Release 时，建议把这个 `dist/meep.exe` 作为附件上传，让普通用户不需要安装 Python。
+
+## 打包 macOS 应用
+
+需要在 macOS 上打包：
+
+```bash
+pip install -r requirements-macos-dev.txt
+pyinstaller meep-macos.spec --noconfirm --clean
+```
+
+打包完成后，应用位于 `dist/MEEP.app`。
 
 ## 自定义动画
 
